@@ -1,0 +1,70 @@
+.title__container{
+    width: 0 auto;
+    margin: 4vh 0 0 0;
+    display: flex;
+    justify-content: center;
+    color: var(--crunchy-orange);
+    font-weight: bold;
+}
+
+.img__container{
+    width: fit-content;
+    height: auto;
+    margin: 1vh auto;
+    display: flex;
+    box-shadow: -5px 5px var(--black), rgba(244, 117, 33, 0.3) -10px 10px, rgba(244, 117, 33, 0.2) -15px 15px, rgba(244, 117, 33, 0.1) -20px 20px, rgba(244, 117, 33, 0.05) -25px 25px;
+}
+
+.search__container{
+    width: 0 auto;
+    margin: 5vh 0 0 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.search__container input, button {
+    margin: 0 1vh 2vh 1vh;
+    border: none;
+}
+
+.search__container input {
+    width: 50vh;
+    height: 5vh;
+    text-align: center;
+}
+
+.btn__check{
+    width: 30vh;
+    height: 5vh;
+    background-color: var(--crunchy-orange);
+    font-weight: bold;
+}
+
+.btn__pass{
+    width: 10vh;
+    height: 5vh;
+    background: none;
+    border: solid 2px var(--crunchy-orange);
+    color: var(--crunchy-orange);
+    font-weight: bold;
+}
+
+.effort__container{
+    margin: 1vh auto;
+    display: flex;
+    justify-content: center;
+}
+
+.effort__box{
+    width: 1.5vh;
+    margin: 0 2px;
+    padding: 1.5vh;
+    background-color: var(--crunchy-orange);
+}
+
+.effort__text{
+    margin: 0 0 2vh 0;
+    text-align: center;
+    color: var(--white);
+}

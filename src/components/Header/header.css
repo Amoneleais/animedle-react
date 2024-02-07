@@ -1,0 +1,27 @@
+header {
+    top: 0;
+    width: 100%;
+    height: 10vh;
+    background-color: var(--crunchy-gray);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+    position: static;
+}
+
+.title{
+    color: var(--crunchy-orange);
+}
+
+.button{
+    margin: auto 2vh;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.button:hover{
+    color: var(--crunchy-orange);
+    transition: 0.5s;
+}
