@@ -1,7 +1,8 @@
 import React from "react";
 import { ImagePixelated } from "react-pixelate";
 import '../styles/ClassicMode.css';
-import Header from '../components/Header/Header'
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
 
 export default function ClassicMode() {
 
@@ -13,7 +14,7 @@ export default function ClassicMode() {
             </div>
             <div className="img__container">
                 <ImagePixelated 
-                    width={320} height={450}
+                    width={300} height={420}
                     className="image"
                     pixelSize={12} 
                     src="https:\/\/cdn.myanimelist.net\/images\/anime\/1314\/108941l.jpg"
@@ -38,6 +39,7 @@ export default function ClassicMode() {
             <div className="effort__text">
                 <h5>6 tentativas restantes</h5>
             </div>
+            <Footer></Footer>
         </div>
     )
 }
