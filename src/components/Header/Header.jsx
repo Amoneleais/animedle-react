@@ -8,7 +8,8 @@ export default function Header() {
     return (
         <header>
             <div className='title'>
-                <h2>ANIMEDLE</h2>
+                <h1>ANIMEDLE</h1>
+                <p>アニメの言葉</p>
             </div>
             <div className='navigation__container'>
                 <Link to={"/"} className='button'>Modos de Jogo</Link>

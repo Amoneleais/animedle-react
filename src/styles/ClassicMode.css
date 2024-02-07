@@ -1,10 +1,9 @@
 .title__container{
     width: 0 auto;
-    margin: 4vh 0 0 0;
+    margin: 4vh 0 4vh 0;
     display: flex;
     justify-content: center;
-    color: var(--crunchy-orange);
-    font-weight: bold;
+    color: var(--white);
 }
 
 .img__container{
@@ -26,7 +25,20 @@
 .search__container input, button {
     margin: 0 1vh 2vh 1vh;
     border: none;
+    cursor: pointer;
 }
+
+.btn__container{
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width:480px)  { 
+    
+    .btn__container{
+        flex-direction: column-reverse;
+    }
+ }
 
 .search__container input {
     width: 50vh;
@@ -39,6 +51,12 @@
     height: 5vh;
     background-color: var(--crunchy-orange);
     font-weight: bold;
+    font-family: "Lato",Helvetica Neue,helvetica,sans-serif;
+}
+
+.btn__check:hover{
+    opacity: 0.8;
+    transition: 0.5s;
 }
 
 .btn__pass{
@@ -48,12 +66,25 @@
     border: solid 2px var(--crunchy-orange);
     color: var(--crunchy-orange);
     font-weight: bold;
+    font-family: "Lato",Helvetica Neue,helvetica,sans-serif;
+}
+
+.btn__pass:hover{
+    background-color: var(--red);
+    color: var(--black);
+    border: none;
+    transition: 0.5s;
+}
+
+.info__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .effort__container{
-    margin: 1vh auto;
+    margin: 1vh;
     display: flex;
-    justify-content: center;
 }
 
 .effort__box{
@@ -61,10 +92,16 @@
     margin: 0 2px;
     padding: 1.5vh;
     background-color: var(--crunchy-orange);
+    border-radius: 50px;
 }
 
 .effort__text{
     margin: 0 0 1vh 0;
     text-align: center;
     color: var(--white);
+}
+
+.score__container{
+    width: fit-content;
+    color: var(--crunchy-orange);
 }

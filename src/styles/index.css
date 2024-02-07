@@ -15,10 +15,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    font-family: "Lato",Helvetica Neue,helvetica,sans-serif;
+    
 }
 
 body{
     background-color: var(--black);
+    font-family: "Lato",Helvetica Neue,helvetica,sans-serif;
+}
+
+body::-webkit-scrollbar {
+    width: 0.5rem;
+    display: inline-block;
+    background: none;
+  }
+   
+  body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--crunchy-orange);
+    outline: none;
+    border-radius: 50px;
 }

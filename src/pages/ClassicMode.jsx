@@ -25,16 +25,23 @@ export default function ClassicMode() {
                     type="text"
                     placeholder="Buscar..."
                 />
-                <button type="submit" className="btn__pass">NÃO SEI</button>
-                <button type="submit" className="btn__check">ADIVINHAR 推測</button>
+                <div className="btn__container">
+                    <button type="submit" className="btn__pass">NÃO SEI</button>
+                    <button type="submit" className="btn__check">ADIVINHAR 推測</button>
+                </div>
             </div>
-            <div className="effort__container">
-                <div className="effort__box"></div>
-                <div className="effort__box"></div>
-                <div className="effort__box"></div>
-                <div className="effort__box"></div>
-                <div className="effort__box"></div>
-                <div className="effort__box"></div>
+            <div className="info__container">
+                <div className="effort__container">
+                    <div className="effort__box"></div>
+                    <div className="effort__box"></div>
+                    <div className="effort__box"></div>
+                    <div className="effort__box"></div>
+                    <div className="effort__box"></div>
+                    <div className="effort__box"></div>
+                </div>
+                <div className="score__container">
+                    <p className="score__display">Placar: 0</p>
+                </div>
             </div>
             <div className="effort__text">
                 <h5>6 tentativas restantes</h5>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fondamento&family=Sedgwick+Ave+Display&display=swap');
+
 header {
     top: 0;
     width: 100%;
@@ -12,13 +14,25 @@ header {
 }
 
 .title{
+    display: flex;
     color: var(--crunchy-orange);
+    font-family: 'Fondamento', cursive;
+    align-items: end;
+}
+
+.title h1{
+    font-size: 4vh;
+}
+
+.title p{
+    font-size: 1vh;
 }
 
 .button{
     margin: auto 2vh;
     color: var(--white);
     text-decoration: none;
+    font-family: "Lato",Helvetica Neue,helvetica,sans-serif;
 }
 
 .button:hover{
