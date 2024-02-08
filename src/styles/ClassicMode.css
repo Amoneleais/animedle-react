@@ -37,8 +37,17 @@
     width: 50vh;
     height: 5vh;
     text-align: center;
+    border: solid 2px var(--white);
+    transition: 0.5s;
 }
 
+.search__container input:focus {
+    outline: none !important;
+    border:2px solid var(--crunchy-blue);
+    color: var(--crunchy-blue);
+    background-color: var(--black);
+    transition: 0.5s;
+}
 
 .btn__check{
     width: 30vh;
