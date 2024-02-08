@@ -14,7 +14,7 @@ export default function ClassicMode() {
             </div>
             <div className="img__container">
                 <ImagePixelated 
-                    width={300} height={420}
+                    width={300} height={430}
                     className="image"
                     pixelSize={12} 
                     src="https:\/\/cdn.myanimelist.net\/images\/anime\/1314\/108941l.jpg"
