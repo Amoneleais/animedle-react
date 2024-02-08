@@ -15,6 +15,7 @@ export default function ClassicMode() {
 
     useEffect(() => {
         fetchAnimeTitle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const checkAnswer = () => {
