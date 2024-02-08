@@ -1,10 +1,61 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ImagePixelated } from "react-pixelate";
 import '../styles/ClassicMode.css';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
 export default function ClassicMode() {
+    const [animeTitle, setAnimeTitle] = useState(null);
+    const [animeCover, setAnimeCover] = useState(null);
+    const [inputText, setInputText] = useState('');
+    const [remainingAttempts, setRemainingAttempts] = useState(6);
+    
+    const total = 58066;
+    let displayed = [];
+
+    useEffect(() => {
+        fetchAnimeTitle();
+    }, []);
+
+    const checkAnswer = () => {
+        if (inputText.trim().toLowerCase() === animeTitle?.toLowerCase()) {
+            setRemainingAttempts(6); 
+            fetchAnimeTitle();
+        } else {
+            setRemainingAttempts(prevAttempts => prevAttempts - 1);
+        }
+    }
+
+    const fetchAnimeTitle = () => {
+        setAnimeCover(null);
+        let animeId = Math.floor(Math.random() * 58066) + 1;
+        if(animeId > total){
+            fetchAnimeTitle();
+        }
+        else{
+            for(let i = 0; i < displayed.length; i++){
+                if(displayed[i] === animeId){
+                    animeId = Math.floor(Math.random() * 58066) + 1;
+                    i = 0;
+                }
+            }
+    
+            const apiUrl = `https://api.jikan.moe/v4/anime/${animeId}`;
+            
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const title = data.data.title;
+                    const cover = data.data.images.jpg.large_image_url;
+                    setAnimeCover(cover);
+                    setAnimeTitle(title);
+                })
+                .catch(error => {
+                    displayed.push(animeId);
+                    fetchAnimeTitle();
+                });
+        }
+    };
 
     return (
         <div className="App">
@@ -13,21 +64,23 @@ export default function ClassicMode() {
                 <h3>QUAL O ANIME DA CAPA?</h3>
             </div>
             <div className="img__container">
-                <ImagePixelated 
+                {animeCover && <ImagePixelated 
                     width={300} height={430}
                     className="image"
-                    pixelSize={12} 
-                    src="https:\/\/cdn.myanimelist.net\/images\/anime\/1314\/108941l.jpg"
-                />
+                    pixelSize={1} 
+                    src={animeCover}
+                />}
             </div>
             <div className="search__container">
                 <input
                     type="text"
                     placeholder="Buscar..."
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
                 />
                 <div className="btn__container">
-                    <button type="submit" className="btn__pass">NÃO SEI</button>
-                    <button type="submit" className="btn__check">ADIVINHAR 推測</button>
+                    <button type="button" className="btn__pass" onClick={() => setInputText(animeTitle)}>NÃO SEI</button>
+                    <button type="button" className="btn__check" onClick={checkAnswer}>ADIVINHAR 推測</button>
                 </div>
             </div>
             <div className="info__container">
@@ -44,13 +97,9 @@ export default function ClassicMode() {
                 </div>
             </div>
             <div className="effort__text">
-                <h5>6 tentativas restantes</h5>
+                <h5>{`${remainingAttempts} tentativas restantes`}</h5>
             </div>
             <Footer></Footer>
         </div>
     )
 }
-
-
-
-

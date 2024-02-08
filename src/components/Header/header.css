@@ -10,6 +10,7 @@ header {
     justify-content: space-between; 
     align-items: center;
     position: static;
+    user-select: none;
 }
 
 .title {
