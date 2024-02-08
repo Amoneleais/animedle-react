@@ -33,18 +33,12 @@
     align-items: center;
 }
 
-@media (max-width:480px)  { 
-    
-    .btn__container{
-        flex-direction: column-reverse;
-    }
- }
-
 .search__container input {
     width: 50vh;
     height: 5vh;
     text-align: center;
 }
+
 
 .btn__check{
     width: 30vh;
@@ -74,6 +68,19 @@
     color: var(--black);
     border: none;
     transition: 0.5s;
+}
+
+@media (max-width:480px)  { 
+    
+    .btn__container{
+        flex-direction: column-reverse;
+    }
+
+    .btn__check{
+        width: 50vh;
+        height: 5vh;
+    }
+
 }
 
 .info__container{
