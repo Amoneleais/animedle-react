@@ -35,7 +35,7 @@ export default function Header() {
             </div>
             <div className='navigation__container'>
                 <div className={`menu-icon ${isMenuOpen ? 'hidden' : ''}`} onClick={openMenu}>
-                    &#9776;
+                ☰
                 </div>
                 {isMenuOpen && (
                     <div ref={sideMenuRef} className="side-menu open" onClick={closeMenu}>
