@@ -20,29 +20,40 @@ export default function ClassicMode() {
     }, []);
 
     const checkAnswer = () => {
-        if (inputText.trim().toLowerCase() === animeTitle?.toLowerCase()) {
-            setRemainingAttempts(6);
-            setScore(score + remainingAttempts);
-            getRandomAnime();
-        } else if (remainingAttempts - 1 === 0) {
-            setPixelSize(17);
-            setRemainingAttempts(6);
-            getRandomAnime();
-            setScore(0);
-        } else {
-            setRemainingAttempts(prevAttempts => prevAttempts - 1);
-            setPixelSize(pixelSize-3);
+        const isInputCorrect = allAnimeTitles.some(anime =>
+            anime.titles.some(title =>
+                title.title.toLowerCase() === inputText.trim().toLowerCase()
+            )
+        );
+    
+        if (isInputCorrect) {
+            if (inputText.trim().toLowerCase() === animeTitle?.toLowerCase()) {
+                setPixelSize(17);
+                setRemainingAttempts(6);
+                setScore(score + remainingAttempts);
+                getRandomAnime();
+            } else if (remainingAttempts - 1 === 0) {
+                setPixelSize(17);
+                setRemainingAttempts(6);
+                getRandomAnime();
+                setScore(0);
+            } else {
+                setRemainingAttempts(prevAttempts => prevAttempts - 1);
+                setPixelSize(pixelSize-3);
+            }
         }
-    }
-
+    };
+    
     const getRandomAnime = () => {
-        const randomIndex = Math.floor(Math.random() * allAnimeTitles.length);
-        const randomAnime = allAnimeTitles[randomIndex];
+        const englishTitles = allAnimeTitles.filter(anime => anime.titles.some(title => title.type === "English"));
+        const randomIndex = Math.floor(Math.random() * englishTitles.length);
+        const randomAnime = englishTitles[randomIndex];
         const randomTitleIndex = Math.floor(Math.random() * randomAnime.titles.length);
-        const randomTitle = randomAnime.titles[randomTitleIndex].title;
+        const randomTitle = randomAnime.titles.find(title => title.type === "English").title;
         setAnimeTitle(randomTitle);
         setAnimeCover(randomAnime.images.jpg.large_image_url);
     };
+    
 
     const handleInputChange = (e) => {
         const searchText = e.target.value;
@@ -51,9 +62,11 @@ export default function ClassicMode() {
             setSuggestions([]);
             return;
         }
-        const filteredTitles = allAnimeTitles.filter(title => title.title.toLowerCase().includes(searchText.toLowerCase()));
+        const filteredTitles = allAnimeTitles.filter(title => 
+            title.titles.some(t => t.type === 'English' && t.title.toLowerCase().includes(searchText.toLowerCase()))
+        );
         setSuggestions(filteredTitles.slice(0, 10));
-    }
+    }    
 
     const handleSuggestionClick = (title) => {
         setInputText(title);
@@ -114,7 +127,7 @@ export default function ClassicMode() {
             </div>
             <div className="info__container">
                 <div className="effort__container">
-                    {[...Array(6)].map((_, index) => (
+                    {[...Array(remainingAttempts)].map((_, index) => (
                         <div key={index} className="effort__box"></div>
                     ))}
                 </div>
