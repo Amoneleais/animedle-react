@@ -3,7 +3,7 @@ import { ImagePixelated } from "react-pixelate";
 import '../styles/ClassicMode.css';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-const allAnimeTitles = require('./animeTitles.json'); // Importing the anime titles from the file
+const allAnimeTitles = require('./animeTitles.json');
 
 export default function ClassicMode() {
     const [animeTitle, setAnimeTitle] = useState(null);
@@ -18,6 +18,21 @@ export default function ClassicMode() {
     useEffect(() => {
         getRandomAnime();
     }, []);
+
+    const checkAnswer = () => {
+        if (inputText.trim().toLowerCase() === animeTitle?.toLowerCase()) {
+            setRemainingAttempts(6);
+            setScore(score + remainingAttempts);
+            getRandomAnime();
+        } else if (remainingAttempts - 1 === 0) {
+            setRemainingAttempts(6);
+            getRandomAnime();
+            setScore(0);
+        } else {
+            setRemainingAttempts(prevAttempts => prevAttempts - 1);
+            setPixelSize(pixelSize-3);
+        }
+    }
 
     const getRandomAnime = () => {
         const randomIndex = Math.floor(Math.random() * allAnimeTitles.length);
@@ -36,7 +51,7 @@ export default function ClassicMode() {
             return;
         }
         const filteredTitles = allAnimeTitles.filter(title => title.title.toLowerCase().includes(searchText.toLowerCase()));
-        setSuggestions(filteredTitles.slice(0, 10)); // Limiting suggestions to first 10 matches
+        setSuggestions(filteredTitles.slice(0, 10));
     }
 
     const handleSuggestionClick = (title) => {
@@ -73,27 +88,27 @@ export default function ClassicMode() {
             </div>
             <div className="search__container" ref={inputRef}>
                 <div className="input__autocomplete">
-                    <input
-                        type="text"
-                        placeholder="Buscar..."
-                        value={inputText}
-                        onChange={handleInputChange}
-                    />
-                    <div className="autocomplete__list">
-                        {suggestions.length > 0 && (
-                            <ul>
-                                {suggestions.map((suggestion, index) => (
-                                    <li key={index} onClick={() => handleSuggestionClick(suggestion.title)}>
-                                        {suggestion.title}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
+                <input
+                    type="text"
+                    placeholder="Buscar..."
+                    value={inputText}
+                    onChange={handleInputChange}
+                />
+                <div className="autocomplete__list">
+                    {suggestions.length > 0 && (
+                        <ul>
+                            {suggestions.map((suggestion, index) => (
+                                <li key={index} onClick={() => handleSuggestionClick(suggestion.title)}>
+                                    {suggestion.title}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>                   
                 </div>
                 <div className="btn__container">
                     <button type="button" className="btn__pass" onClick={() => setInputText(animeTitle)}>NÃO SEI</button>
-                    <button type="button" className="btn__check">ADIVINHAR 推測</button>
+                    <button type="button" className="btn__check" onClick={checkAnswer}>ADIVINHAR 推測</button>
                 </div>
             </div>
             <div className="info__container">

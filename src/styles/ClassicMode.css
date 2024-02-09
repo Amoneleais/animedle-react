@@ -37,6 +37,7 @@
 .search__container input {
     width: 50vh;
     height: 5vh;
+    margin: 0;
     text-align: center;
     border: solid 2px var(--white);
     transition: 0.5s;
@@ -119,10 +120,6 @@
     color: var(--white);
 }
 
-body{
-    background: color
-}
-
 .score__container{
     width: fit-content;
     color: var(--crunchy-orange);
@@ -137,14 +134,18 @@ body{
     flex-direction: column;
     align-items: center;
 }
+.search__container {
+    position: relative;
+}
 
 .autocomplete__list {
-    display: none;
+    position: absolute;
+    top: 5vh;
     width: 50vh;
-    max-height: 200px; /* Set maximum height for the dropdown */
-    overflow-y: auto; /* Enable vertical scrolling */
-    border: 1px solid #ccc;
-    background-color: #fff;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: var(--black);
+    color: var(--crunchy-blue);
     z-index: 1;
 }
 
@@ -160,5 +161,25 @@ body{
 }
 
 .autocomplete__list li:hover {
-    background-color: #f4f4f4;
+   background-color: var(--crunchy-blue);
+   color: var(--black);
+   transition: 0.5s;
+}
+
+.autocomplete__list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.autocomplete__list::-webkit-scrollbar-track {
+    background: var(--black); 
+}
+
+.autocomplete__list::-webkit-scrollbar-thumb {
+    background-color: var(--crunchy-blue); 
+    border-radius: 4px; 
+}
+
+.autocomplete__list {
+    scrollbar-width: thin; 
+    scrollbar-color: var(--crunchy-blue) var(--black); 
 }
