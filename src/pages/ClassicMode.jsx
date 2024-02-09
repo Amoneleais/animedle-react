@@ -22,15 +22,16 @@ export default function ClassicMode() {
     }, []);
 
     const dontKnow = () => {
-        if(remainingAttempts === 1){
+        if (remainingAttempts === 1) {
+            setRemainingAttempts(6);
             setPixelSize(17);
             setScore(0);
             getRandomAnime();
-            setRemainingAttempts(6);
+        } else {
+            getRandomAnime();
+            setPixelSize(17);
+            setRemainingAttempts(remainingAttempts - 1);
         }
-        getRandomAnime();
-        setPixelSize(17);
-        setRemainingAttempts(remainingAttempts - 1);
     };
 
     const checkAnswer = () => {
