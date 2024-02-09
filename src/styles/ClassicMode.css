@@ -232,3 +232,7 @@
     background-color: #ff0000;
     border-radius: 5px;
 }
+
+.strong-blur {
+    filter: blur(2px); 
+}

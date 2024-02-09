@@ -10,7 +10,7 @@ export default function ClassicMode() {
     const [animeCover, setAnimeCover] = useState(null);
     const [inputText, setInputText] = useState('');
     const [remainingAttempts, setRemainingAttempts] = useState(6);
-    const [pixelSize, setPixelSize] = useState(17);
+    const [pixelSize, setPixelSize] = useState(15);
     const [score, setScore] = useState(0);
     const [suggestions, setSuggestions] = useState([]);
     const [alreadyInserted, setAlreadyInserted] = useState([]);
@@ -29,7 +29,7 @@ export default function ClassicMode() {
             resetGame();
         } else {
             getRandomAnime();
-            setPixelSize(17);
+            setPixelSize(15);
             setRemainingAttempts(remainingAttempts - 1);
             setAlreadyInserted([]);
         }
@@ -43,14 +43,25 @@ export default function ClassicMode() {
                 title.title.toLowerCase() === inputText.trim().toLowerCase()
             )
         );
+        for(let i = 0; i < alreadyInserted.length; i++){
+            if(inputText === alreadyInserted[i]){
+                return;
+            }
+        }
         if (isInputCorrect) {
             if (inputText.trim().toLowerCase() === animeTitle?.toLowerCase()) {
                 setAnswerCorrect();
             } else if (remainingAttempts - 1 === 0) {
                 resetGame();
             } else {
+                if(pixelSize === 15){
+                    setPixelSize(pixelSize - 3);
+                }else if(pixelSize <= 12 && pixelSize > 6){
+                    setPixelSize(pixelSize - 2);
+                }else if(pixelSize === 6){
+                    setPixelSize(0);
+                }
                 setRemainingAttempts(prevAttempts => prevAttempts - 1);
-                setPixelSize(pixelSize - 3);
                 setAlreadyInserted(prevNames => [inputText, ...prevNames]);
             }
         }
@@ -63,12 +74,12 @@ export default function ClassicMode() {
         const randomTitle = randomAnime.titles.find(title => title.type === "Default").title;
         setAnimeTitle(randomTitle);
         setAnimeCover(randomAnime.images.jpg.large_image_url);
-        setPixelSize(17);
-        setIsAnswerCorrect(false); // Reset answer correctness state
+        setPixelSize(15);
+        setIsAnswerCorrect(false);
     };
 
     const resetGame = () => {
-        setPixelSize(17);
+        setPixelSize(15);
         setRemainingAttempts(6);
         setScore(0);
         getRandomAnime();
@@ -121,12 +132,14 @@ export default function ClassicMode() {
                 <h3>QUAL O ANIME DA CAPA?</h3>
             </div>
             <div className="img__container">
-                {animeCover && <ImagePixelated
-                    width={300} height={430}
-                    className="image"
-                    pixelSize={pixelSize}
-                    src={animeCover}
-                />}
+                <div className={`blur ${pixelSize < 6 ? 'strong-blur' : ''}`}>
+                    {animeCover && <ImagePixelated
+                        width={300} height={430}
+                        className="image"
+                        pixelSize={pixelSize}
+                        src={animeCover}
+                    />}
+                </div>
             </div>
             <div className="if__correct">
                 {isAnswerCorrect && 
