@@ -25,6 +25,7 @@ export default function ClassicMode() {
             setScore(score + remainingAttempts);
             getRandomAnime();
         } else if (remainingAttempts - 1 === 0) {
+            setPixelSize(17);
             setRemainingAttempts(6);
             getRandomAnime();
             setScore(0);
