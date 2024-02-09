@@ -22,6 +22,8 @@ export default function ClassicMode() {
     }, []);
 
     const dontKnow = () => {
+        setInputText("");
+        setSuggestions([]);
         if (remainingAttempts === 1) {
             setRemainingAttempts(6);
             setPixelSize(17);
@@ -35,12 +37,13 @@ export default function ClassicMode() {
     };
 
     const checkAnswer = () => {
+        setInputText("");
+        setSuggestions([]);
         const isInputCorrect = allAnimeTitles.some(anime =>
             anime.titles.some(title =>
                 title.title.toLowerCase() === inputText.trim().toLowerCase()
             )
         );
-    
         if (isInputCorrect) {
             if (inputText.trim().toLowerCase() === animeTitle?.toLowerCase()) {
                 setPixelSize(17);
