@@ -29,10 +29,12 @@ export default function ClassicMode() {
             setPixelSize(17);
             setScore(0);
             getRandomAnime();
+            setAlreadyInserted([]);
         } else {
             getRandomAnime();
             setPixelSize(17);
             setRemainingAttempts(remainingAttempts - 1);
+            setAlreadyInserted([]);
         }
     };
 
