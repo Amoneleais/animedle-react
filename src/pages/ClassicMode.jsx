@@ -21,6 +21,18 @@ export default function ClassicMode() {
         getRandomAnime();
     }, []);
 
+    const dontKnow = () => {
+        if(remainingAttempts === 1){
+            setPixelSize(17);
+            setScore(0);
+            getRandomAnime();
+            setRemainingAttempts(6);
+        }
+        getRandomAnime();
+        setPixelSize(17);
+        setRemainingAttempts(remainingAttempts - 1);
+    };
+
     const checkAnswer = () => {
         const isInputCorrect = allAnimeTitles.some(anime =>
             anime.titles.some(title =>
@@ -41,6 +53,7 @@ export default function ClassicMode() {
                 setRemainingAttempts(6);
                 getRandomAnime();
                 setScore(0);
+                setAlreadyInserted([]);
             } else {
                 setRemainingAttempts(prevAttempts => prevAttempts - 1);
                 setPixelSize(pixelSize-3);
@@ -124,7 +137,7 @@ export default function ClassicMode() {
                     </div>                   
                 </div>
                 <div className="btn__container">
-                    <button type="button" className="btn__pass" onClick={() => setInputText(animeTitle)}>NÃO SEI</button>
+                    <button type="button" className="btn__pass" onClick={dontKnow}>NÃO SEI</button>
                     <button type="button" className="btn__check" onClick={checkAnswer}>ADIVINHAR 推測</button>
                 </div>
             </div>
