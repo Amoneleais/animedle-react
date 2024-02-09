@@ -29,6 +29,7 @@
 }
 
 .btn__container{
+    height: fit-content;
     display: flex;
     align-items: center;
 }
@@ -118,7 +119,46 @@
     color: var(--white);
 }
 
+body{
+    background: color
+}
+
 .score__container{
     width: fit-content;
     color: var(--crunchy-orange);
+}
+
+.search__container {
+    position: relative;
+}
+
+.input__autocomplete{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.autocomplete__list {
+    display: none;
+    width: 50vh;
+    max-height: 200px; /* Set maximum height for the dropdown */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ccc;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.autocomplete__list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.autocomplete__list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.autocomplete__list li:hover {
+    background-color: #f4f4f4;
 }
