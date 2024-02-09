@@ -184,3 +184,22 @@
     scrollbar-width: thin; 
     scrollbar-color: var(--crunchy-blue) var(--black); 
 }
+
+.inserted__container {
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.inserted__name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 3vh;
+    margin: 0.2vh;
+    background-color: #ff0000;
+    border-radius: 5px;
+}

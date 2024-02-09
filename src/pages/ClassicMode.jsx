@@ -13,6 +13,8 @@ export default function ClassicMode() {
     const [pixelSize, setPixelSize] = useState(17);
     const [score, setScore] = useState(0);
     const [suggestions, setSuggestions] = useState([]);
+    const [alreadyInserted, setAlreadyInserted] = useState([]);
+
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -30,8 +32,10 @@ export default function ClassicMode() {
             if (inputText.trim().toLowerCase() === animeTitle?.toLowerCase()) {
                 setPixelSize(17);
                 setRemainingAttempts(6);
+                setAlreadyInserted();
                 setScore(score + remainingAttempts);
                 getRandomAnime();
+                setAlreadyInserted([]);
             } else if (remainingAttempts - 1 === 0) {
                 setPixelSize(17);
                 setRemainingAttempts(6);
@@ -40,6 +44,7 @@ export default function ClassicMode() {
             } else {
                 setRemainingAttempts(prevAttempts => prevAttempts - 1);
                 setPixelSize(pixelSize-3);
+                setAlreadyInserted(prevNames => [...prevNames, inputText]);
             }
         }
     };
@@ -48,12 +53,10 @@ export default function ClassicMode() {
         const englishTitles = allAnimeTitles.filter(anime => anime.titles.some(title => title.type === "English"));
         const randomIndex = Math.floor(Math.random() * englishTitles.length);
         const randomAnime = englishTitles[randomIndex];
-        const randomTitleIndex = Math.floor(Math.random() * randomAnime.titles.length);
         const randomTitle = randomAnime.titles.find(title => title.type === "English").title;
         setAnimeTitle(randomTitle);
         setAnimeCover(randomAnime.images.jpg.large_image_url);
     };
-    
 
     const handleInputChange = (e) => {
         const searchText = e.target.value;
@@ -66,7 +69,7 @@ export default function ClassicMode() {
             title.titles.some(t => t.type === 'English' && t.title.toLowerCase().includes(searchText.toLowerCase()))
         );
         setSuggestions(filteredTitles.slice(0, 10));
-    }    
+    };
 
     const handleSuggestionClick = (title) => {
         setInputText(title);
@@ -102,23 +105,23 @@ export default function ClassicMode() {
             </div>
             <div className="search__container" ref={inputRef}>
                 <div className="input__autocomplete">
-                <input
-                    type="text"
-                    placeholder="Buscar..."
-                    value={inputText}
-                    onChange={handleInputChange}
-                />
-                <div className="autocomplete__list">
-                    {suggestions.length > 0 && (
-                        <ul>
-                            {suggestions.map((suggestion, index) => (
-                                <li key={index} onClick={() => handleSuggestionClick(suggestion.title)}>
-                                    {suggestion.title}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>                   
+                    <input
+                        type="text"
+                        placeholder="Buscar..."
+                        value={inputText}
+                        onChange={handleInputChange}
+                    />
+                    <div className="autocomplete__list">
+                        {suggestions.length > 0 && (
+                            <ul>
+                                {suggestions.map((suggestion, index) => (
+                                    <li key={index} onClick={() => handleSuggestionClick(suggestion.title)}>
+                                        {suggestion.title}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>                   
                 </div>
                 <div className="btn__container">
                     <button type="button" className="btn__pass" onClick={() => setInputText(animeTitle)}>NÃO SEI</button>
@@ -137,6 +140,11 @@ export default function ClassicMode() {
             </div>
             <div className="effort__text">
                 <h5>{`${remainingAttempts} tentativas restantes`}</h5>
+            </div>
+            <div className="inserted__container">
+                {alreadyInserted.map((name, index) => (
+                    <div key={index} className="inserted__name">{name}</div>
+                ))}
             </div>
             <Footer />
         </div>
