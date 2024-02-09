@@ -63,7 +63,7 @@ export default function ClassicMode() {
             } else {
                 setRemainingAttempts(prevAttempts => prevAttempts - 1);
                 setPixelSize(pixelSize-3);
-                setAlreadyInserted(prevNames => [...prevNames, inputText]);
+                setAlreadyInserted(prevNames => [inputText, ...prevNames]);
             }
         }
     };
