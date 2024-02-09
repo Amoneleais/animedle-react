@@ -67,8 +67,7 @@ export default function ClassicMode() {
         const englishTitles = allAnimeTitles.filter(anime => anime.titles.some(title => title.type === "English"));
         const randomIndex = Math.floor(Math.random() * englishTitles.length);
         const randomAnime = englishTitles[randomIndex];
-        const randomTitle = randomAnime.titles.find(title => title.type === "English").title;
-        console.log(randomTitle);
+        const randomTitle = randomAnime.titles.find(title => title.type === "Default").title;
         setAnimeTitle(randomTitle);
         setAnimeCover(randomAnime.images.jpg.large_image_url);
     };
