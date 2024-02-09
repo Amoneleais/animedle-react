@@ -85,7 +85,7 @@ export default function ClassicMode() {
             return;
         }
         const filteredTitles = allAnimeTitles.filter(title => 
-            title.titles.some(t => t.type === 'English' && t.title.toLowerCase().includes(searchText.toLowerCase()))
+            title.titles.some(t => t.type === 'Default' && t.title.toLowerCase().includes(searchText.toLowerCase()))
         );
         setSuggestions(filteredTitles.slice(0, 10));
     };
