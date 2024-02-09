@@ -46,7 +46,7 @@ export default function ClassicMode() {
                 setPixelSize(17);
                 setRemainingAttempts(6);
                 setAlreadyInserted();
-                setScore(score + remainingAttempts);
+                setScore(score + 1);
                 getRandomAnime();
                 setAlreadyInserted([]);
             } else if (remainingAttempts - 1 === 0) {
