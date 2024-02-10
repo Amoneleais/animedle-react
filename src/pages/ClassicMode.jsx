@@ -3,6 +3,9 @@ import { ImagePixelated } from "react-pixelate";
 import '../styles/ClassicMode.css';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
+import correctAnswerSound from '../assets/mp3/correct-answer.mp3';
+import wrongAnswerSound from '../assets/mp3/wrong-answer.mp3';
+
 const allAnimeTitles = require('./animeTitles.json');
 
 export default function ClassicMode() {
@@ -16,12 +19,32 @@ export default function ClassicMode() {
     const [alreadyInserted, setAlreadyInserted] = useState([]);
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
     const [isAnswerWrong, setIsAnswerWrong] = useState(false);
+    const [playCorrectSound, setPlayCorrectSound] = useState(false);
+    const [playWrongSound, setPlayWrongSound] = useState(false);
 
     const inputRef = useRef(null);
 
     useEffect(() => {
         getRandomAnime();
     }, []);
+
+    useEffect(() => {
+        if (playCorrectSound) {
+            const audio = new Audio(correctAnswerSound);
+            audio.volume = 0.5;
+            audio.play();
+            setPlayCorrectSound(false);
+        }
+    }, [playCorrectSound]);
+    
+    useEffect(() => {
+        if (playWrongSound) {
+            const audio = new Audio(wrongAnswerSound);
+            audio.volume = 0.5;
+            audio.play();
+            setPlayWrongSound(false);
+        }
+    }, [playWrongSound]);
 
     const dontKnow = () => {
         setInputText("");
@@ -95,7 +118,8 @@ export default function ClassicMode() {
         setRemainingAttempts(6);
         setScore(0);
         setAlreadyInserted([]);
-    }
+        setPlayWrongSound(true); // Play the wrong answer sound
+    };
 
     const setAnswerCorrect = () => {
         setIsAnswerCorrect(true);
@@ -103,6 +127,7 @@ export default function ClassicMode() {
         setRemainingAttempts(6);
         setAlreadyInserted([]);
         setScore(score + 1);
+        setPlayCorrectSound(true); // Play the correct answer sound
     };
 
     const handleInputChange = (e) => {
