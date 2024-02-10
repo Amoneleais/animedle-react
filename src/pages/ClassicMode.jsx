@@ -261,7 +261,7 @@ export default function ClassicMode() {
                                 const year = anime.aired.string.split(" to ")[0].split(",")[1].trim();
                                 return (
                                     <tr key={index} className="inserted__info">
-                                        <td>{correctAnime.title}</td>
+                                        <td className={`table-cell ${correctAnime.title === anime.title ? "correct-cell" : "incorrect-cell"}`}>{anime.title}</td>
                                         <td className={`table-cell ${correctAnime.type === anime.type ? "correct-cell" : "incorrect-cell"}`}>{anime.type}</td>
                                         <td className={`table-cell ${correctAnime.status === anime.status ? "correct-cell" : "incorrect-cell"}`}>{anime.status}</td>
                                         <td className={`table-cell ${correctYear === year ? "correct-cell" : "incorrect-cell"}`}>{correctYear > year ? year+"▸" : "◂"+year || correctYear === year}</td>
