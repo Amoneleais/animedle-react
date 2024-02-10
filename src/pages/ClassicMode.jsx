@@ -21,7 +21,6 @@ export default function ClassicMode() {
     const [isAnswerWrong, setIsAnswerWrong] = useState(false);
     const [playCorrectSound, setPlayCorrectSound] = useState(false);
     const [playWrongSound, setPlayWrongSound] = useState(false);
-    const [correctAnimeIndex, setCorrectAnimeIndex] = useState(null);
     const [correctAnime, setCorrectAnime] = useState(null);
 
     const inputRef = useRef(null);
@@ -96,7 +95,6 @@ export default function ClassicMode() {
     const getRandomAnime = () => {
         const englishTitles = allAnimeTitles.filter(anime => anime.titles.some(title => title.type === "English"));
         const randomIndex = Math.floor(Math.random() * englishTitles.length);
-        setCorrectAnimeIndex(randomIndex);
         const randomAnime = englishTitles[randomIndex];
         const randomTitle = randomAnime.titles.find(title => title.type === "Default").title;
         setCorrectAnime(randomAnime);
@@ -263,10 +261,10 @@ export default function ClassicMode() {
                                 const year = anime.aired.string.split(" to ")[0].split(",")[1].trim();
                                 return (
                                     <tr key={index} className="inserted__info">
-                                        <td className="table-cell">{insertedName}</td>
+                                        <td>{correctAnime.title}</td>
                                         <td className={`table-cell ${correctAnime.type === anime.type ? "correct-cell" : "incorrect-cell"}`}>{anime.type}</td>
                                         <td className={`table-cell ${correctAnime.status === anime.status ? "correct-cell" : "incorrect-cell"}`}>{anime.status}</td>
-                                        <td className={`table-cell ${correctYear === year ? "correct-cell" : "incorrect-cell"}`}>{correctYear > year ? year+"►" : "◄"+year}</td>
+                                        <td className={`table-cell ${correctYear === year ? "correct-cell" : "incorrect-cell"}`}>{correctYear > year ? year+"▸" : "◂"+year || correctYear === year ? year : ""}</td>
                                         <td className={`table-cell ${correctAnime.studios[0].name === anime.studios[0].name ? "correct-cell" : "incorrect-cell"}`}>{anime.studios[0].name}</td>
                                     </tr>
                                 );
