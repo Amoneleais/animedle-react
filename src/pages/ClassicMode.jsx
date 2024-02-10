@@ -15,6 +15,7 @@ export default function ClassicMode() {
     const [suggestions, setSuggestions] = useState([]);
     const [alreadyInserted, setAlreadyInserted] = useState([]);
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+    const [isAnswerWrong, setIsAnswerWrong] = useState(false);
 
     const inputRef = useRef(null);
 
@@ -52,7 +53,7 @@ export default function ClassicMode() {
             if (inputText.trim().toLowerCase() === animeTitle?.toLowerCase()) {
                 setAnswerCorrect();
             } else if (remainingAttempts - 1 === 0) {
-                resetGame();
+                setAnswerWrong();
             } else {
                 if(pixelSize === 15){
                     setPixelSize(pixelSize - 3);
@@ -76,6 +77,7 @@ export default function ClassicMode() {
         setAnimeCover(randomAnime.images.jpg.large_image_url);
         setPixelSize(15);
         setIsAnswerCorrect(false);
+        setIsAnswerWrong(false);
     };
 
     const resetGame = () => {
@@ -85,6 +87,15 @@ export default function ClassicMode() {
         getRandomAnime();
         setAlreadyInserted([]);
     };
+
+    const setAnswerWrong = () => {
+        setIsAnswerWrong(true);
+        setIsAnswerCorrect(false);
+        setPixelSize(0);
+        setRemainingAttempts(6);
+        setScore(0);
+        setAlreadyInserted([]);
+    }
 
     const setAnswerCorrect = () => {
         setIsAnswerCorrect(true);
@@ -129,10 +140,15 @@ export default function ClassicMode() {
         <div className="App">
             <Header />
             <div className="title__container">
+                {!(isAnswerWrong) && 
                 <h3>QUAL O ANIME DA CAPA?</h3>
+                }
+                {(isAnswerWrong) && 
+                <h3 className="title_game_over">VOCÊ PERDEU!</h3>
+                }
             </div>
             <div className="img__container">
-                <div className={`blur ${pixelSize < 6 ? 'strong-blur' : ''}`}>
+                <div className={`blur ${pixelSize < 6 && remainingAttempts === 1? 'strong-blur' : ''}`}>
                     {animeCover && <ImagePixelated
                         width={300} height={430}
                         className="image"
@@ -142,15 +158,15 @@ export default function ClassicMode() {
                 </div>
             </div>
             <div className="if__correct">
-                {isAnswerCorrect && 
+                {(isAnswerCorrect || isAnswerWrong) && 
                     <h1 className="anime_title">{animeTitle}</h1>
                 }
-                {isAnswerCorrect && 
+                {(isAnswerCorrect || isAnswerWrong) && 
                     <button className="next_button" onClick={getRandomAnime}>Próximo</button>
                 }
 
             </div>
-            {!isAnswerCorrect &&
+            {!(isAnswerCorrect || isAnswerWrong) &&
                 <div className="search__container" ref={inputRef}>
                     <div className="input__autocomplete">
                         <input
@@ -177,7 +193,7 @@ export default function ClassicMode() {
                     </div>
                 </div>
             }
-            {!isAnswerCorrect &&
+            {!(isAnswerCorrect || isAnswerWrong) &&
                 <div className="info__container">
                     <div className="effort__container">
                         {[...Array(remainingAttempts)].map((_, index) => (
@@ -189,12 +205,12 @@ export default function ClassicMode() {
                     </div>
                 </div>
             }
-            {!isAnswerCorrect &&
+            {!(isAnswerCorrect || isAnswerWrong) &&
                 <div className="effort__text">
                     <h5>{`${remainingAttempts} tentativas restantes`}</h5>
                 </div>
             }
-            {!isAnswerCorrect &&
+            {!(isAnswerCorrect || isAnswerWrong) &&
                 <div className="inserted__container">
                     {alreadyInserted.map((name, index) => (
                         <div key={index} className="inserted__name">{name}</div>

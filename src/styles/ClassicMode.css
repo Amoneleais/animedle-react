@@ -6,6 +6,10 @@
     color: var(--white);
 }
 
+.title_game_over{
+    color: var(--red);
+}
+
 .img__container{
     width: fit-content;
     height: auto;
