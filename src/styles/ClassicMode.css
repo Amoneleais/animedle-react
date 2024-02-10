@@ -225,16 +225,26 @@
     justify-content: center;
 }
 
-.inserted__name {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 15%;
+table thead{
+    width: 100%;
     font-size: 1.5vh;
-    margin: 0.2vh;
-    background-color: #ff0000;
-    border-radius: 5px;
+}
+
+.table-cell {
+    border: solid 1vh var(--black);
+}
+
+table tbody {
+    font-size: small;
+    text-align: center;
+}
+
+.correct-cell {
+    color: green;
+}
+
+.incorrect-cell {
+    color: red;
 }
 
 .strong-blur {

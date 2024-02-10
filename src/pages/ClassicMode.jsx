@@ -21,6 +21,7 @@ export default function ClassicMode() {
     const [isAnswerWrong, setIsAnswerWrong] = useState(false);
     const [playCorrectSound, setPlayCorrectSound] = useState(false);
     const [playWrongSound, setPlayWrongSound] = useState(false);
+    const [correctAnimeIndex, setCorrectAnimeIndex] = useState(null);
 
     const inputRef = useRef(null);
 
@@ -94,6 +95,7 @@ export default function ClassicMode() {
     const getRandomAnime = () => {
         const englishTitles = allAnimeTitles.filter(anime => anime.titles.some(title => title.type === "English"));
         const randomIndex = Math.floor(Math.random() * englishTitles.length);
+        setCorrectAnimeIndex(randomIndex);
         const randomAnime = englishTitles[randomIndex];
         const randomTitle = randomAnime.titles.find(title => title.type === "Default").title;
         setAnimeTitle(randomTitle);
@@ -102,6 +104,7 @@ export default function ClassicMode() {
         setIsAnswerCorrect(false);
         setIsAnswerWrong(false);
     };
+    
 
     const resetGame = () => {
         setPixelSize(15);
@@ -237,9 +240,49 @@ export default function ClassicMode() {
             }
             {!(isAnswerCorrect || isAnswerWrong) &&
                 <div className="inserted__container">
-                    {alreadyInserted.map((name, index) => (
-                        <div key={index} className="inserted__name">{name}</div>
-                    ))}
+                    {alreadyInserted.length > 0 &&
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Data de Estreia</th>
+                                <th>Estúdio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {alreadyInserted.map((insertedName, index) => {
+                                const anime = allAnimeTitles.find(anime => {
+                                    return anime.titles.some(title => title.title === insertedName);
+                                });
+                                if (anime) {
+                                    const correctAnime = allAnimeTitles[correctAnimeIndex];
+                                    // Extracting the first year from the aired date
+                                    const airedYear = anime.aired.string.split(" to ")[0].split(",")[1].trim();
+                                    return (
+                                        <tr key={index} className="inserted__info">
+                                            <td className="table-cell">{insertedName}</td>
+                                            <td className={`table-cell ${correctAnime.type === anime.type ? "correct-cell" : "incorrect-cell"}`}>{anime.type}</td>
+                                            <td className={`table-cell ${correctAnime.status === anime.status ? "correct-cell" : "incorrect-cell"}`}>{anime.status}</td>
+                                            <td className={`table-cell ${correctAnime.aired.string.split(" to ")[0] === anime.aired.string.split(" to ")[0] ? "correct-cell" : "incorrect-cell"}`}>{airedYear}</td>
+                                            <td className={`table-cell ${correctAnime.studios[0].name === anime.studios[0].name ? "correct-cell" : "incorrect-cell"}`}>{anime.studios[0].name}</td>
+                                        </tr>
+                                    );
+                                } else {
+                                    return (
+                                        <div key={index} className="inserted__info">
+                                            <div className="inserted__name">{insertedName}</div>
+                                            <div className="inserted__details">
+                                                <p>Anime information not found</p>
+                                            </div>
+                                        </div>
+                                    );
+                                }
+                            })}
+                        </tbody>
+                    </table>
+                    }
                 </div>
             }
             <Footer />
