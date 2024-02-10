@@ -51,7 +51,6 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    z-index: -1;
 }
 
 .search__container input, button {
@@ -114,7 +113,6 @@
 }
 
 @media (max-width:480px)  { 
-    
     .btn__container{
         flex-direction: column-reverse;
         width: 95%;
@@ -177,7 +175,7 @@
 .autocomplete__list {
     position: absolute;
     top: 5vh;
-    width: 50vh;
+    width: 40vh;
     max-height: 200px;
     overflow-y: auto;
     background-color: var(--black);

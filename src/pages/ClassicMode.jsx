@@ -190,7 +190,7 @@ export default function ClassicMode() {
                     <h1 className="anime_title">{animeTitle}</h1>
                 }
                 {(isAnswerCorrect || isAnswerWrong) && 
-                    <button className="next_button" onClick={getRandomAnime}>Próximo</button>
+                    <button className="next_button" onClick={getRandomAnime}>{isAnswerCorrect ? "Próximo" : "Jogar Novamente"}</button>
                 }
 
             </div>
@@ -264,7 +264,7 @@ export default function ClassicMode() {
                                         <td>{correctAnime.title}</td>
                                         <td className={`table-cell ${correctAnime.type === anime.type ? "correct-cell" : "incorrect-cell"}`}>{anime.type}</td>
                                         <td className={`table-cell ${correctAnime.status === anime.status ? "correct-cell" : "incorrect-cell"}`}>{anime.status}</td>
-                                        <td className={`table-cell ${correctYear === year ? "correct-cell" : "incorrect-cell"}`}>{correctYear > year ? year+"▸" : "◂"+year || correctYear === year ? year : ""}</td>
+                                        <td className={`table-cell ${correctYear === year ? "correct-cell" : "incorrect-cell"}`}>{correctYear > year ? year+"▸" : "◂"+year || correctYear === year}</td>
                                         <td className={`table-cell ${correctAnime.studios[0].name === anime.studios[0].name ? "correct-cell" : "incorrect-cell"}`}>{anime.studios[0].name}</td>
                                     </tr>
                                 );
