@@ -47,11 +47,11 @@
 }
 
 .search__container{
-    width: 0 auto;
     margin: 5vh 0 0 0;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    z-index: -1;
 }
 
 .search__container input, button {
@@ -67,7 +67,7 @@
 }
 
 .search__container input {
-    width: 50vh;
+    width: 40vh;
     height: 5vh;
     margin: 0;
     text-align: center;
@@ -121,10 +121,13 @@
     }
 
     .btn__check{
-        width: 100%;
+        width: 50%;
         height: 5vh;
     }
 
+    .btn__pass{
+        width: 50%;
+    }
 }
 
 .info__container{
@@ -240,11 +243,11 @@ table tbody {
 }
 
 .correct-cell {
-    color: green;
+    color: rgb(0, 255, 0);
 }
 
 .incorrect-cell {
-    color: red;
+    color: rgb(255, 0, 0);
 }
 
 .strong-blur {
