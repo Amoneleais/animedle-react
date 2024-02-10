@@ -252,34 +252,35 @@ export default function ClassicMode() {
                             </tr>
                         </thead>
                         <tbody>
-                            {alreadyInserted.map((insertedName, index) => {
-                                const anime = allAnimeTitles.find(anime => {
-                                    return anime.titles.some(title => title.title === insertedName);
-                                });
-                                if (anime) {
-                                    const correctAnime = allAnimeTitles[correctAnimeIndex];
-                                    // Extracting the first year from the aired date
-                                    const airedYear = anime.aired.string.split(" to ")[0].split(",")[1].trim();
-                                    return (
-                                        <tr key={index} className="inserted__info">
-                                            <td className="table-cell">{insertedName}</td>
-                                            <td className={`table-cell ${correctAnime.type === anime.type ? "correct-cell" : "incorrect-cell"}`}>{anime.type}</td>
-                                            <td className={`table-cell ${correctAnime.status === anime.status ? "correct-cell" : "incorrect-cell"}`}>{anime.status}</td>
-                                            <td className={`table-cell ${correctAnime.aired.string.split(" to ")[0] === anime.aired.string.split(" to ")[0] ? "correct-cell" : "incorrect-cell"}`}>{airedYear}</td>
-                                            <td className={`table-cell ${correctAnime.studios[0].name === anime.studios[0].name ? "correct-cell" : "incorrect-cell"}`}>{anime.studios[0].name}</td>
-                                        </tr>
-                                    );
-                                } else {
-                                    return (
-                                        <div key={index} className="inserted__info">
-                                            <div className="inserted__name">{insertedName}</div>
-                                            <div className="inserted__details">
-                                                <p>Anime information not found</p>
-                                            </div>
+                        {alreadyInserted.map((insertedName, index) => {
+                            const anime = allAnimeTitles.find(anime => {
+                                return anime.titles.some(title => title.title === insertedName);
+                            });
+                            if (anime) {
+                                const correctAnime = allAnimeTitles[correctAnimeIndex];
+                                // Extracting the year from the aired dates
+                                const correctYear = correctAnime.aired.string.split(" to ")[0].split(",")[1].trim();
+                                const year = anime.aired.string.split(" to ")[0].split(",")[1].trim();
+                                return (
+                                    <tr key={index} className="inserted__info">
+                                        <td className="table-cell">{insertedName}</td>
+                                        <td className={`table-cell ${correctAnime.type === anime.type ? "correct-cell" : "incorrect-cell"}`}>{anime.type}</td>
+                                        <td className={`table-cell ${correctAnime.status === anime.status ? "correct-cell" : "incorrect-cell"}`}>{anime.status}</td>
+                                        <td className={`table-cell ${correctYear === year ? "correct-cell" : "incorrect-cell"}`}>{year}</td>
+                                        <td className={`table-cell ${correctAnime.studios[0].name === anime.studios[0].name ? "correct-cell" : "incorrect-cell"}`}>{anime.studios[0].name}</td>
+                                    </tr>
+                                );
+                            } else {
+                                return (
+                                    <div key={index} className="inserted__info">
+                                        <div className="inserted__name">{insertedName}</div>
+                                        <div className="inserted__details">
+                                            <p>Anime information not found</p>
                                         </div>
-                                    );
-                                }
-                            })}
+                                    </div>
+                                );
+                            }
+                        })}
                         </tbody>
                     </table>
                     }
