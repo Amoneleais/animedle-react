@@ -22,6 +22,7 @@ export default function ClassicMode() {
     const [playCorrectSound, setPlayCorrectSound] = useState(false);
     const [playWrongSound, setPlayWrongSound] = useState(false);
     const [correctAnimeIndex, setCorrectAnimeIndex] = useState(null);
+    const [correctAnime, setCorrectAnime] = useState(null);
 
     const inputRef = useRef(null);
 
@@ -98,6 +99,7 @@ export default function ClassicMode() {
         setCorrectAnimeIndex(randomIndex);
         const randomAnime = englishTitles[randomIndex];
         const randomTitle = randomAnime.titles.find(title => title.type === "Default").title;
+        setCorrectAnime(randomAnime);
         setAnimeTitle(randomTitle);
         setAnimeCover(randomAnime.images.jpg.large_image_url);
         setPixelSize(15);
@@ -143,7 +145,7 @@ export default function ClassicMode() {
         const filteredTitles = allAnimeTitles.filter(title => 
             title.titles.some(t => t.type === 'Default' && t.title.toLowerCase().includes(searchText.toLowerCase()))
         );
-        setSuggestions(filteredTitles.slice(0, 10));
+        setSuggestions(filteredTitles.slice(0, 50));
     };
 
     const handleSuggestionClick = (title) => {
@@ -257,8 +259,6 @@ export default function ClassicMode() {
                                 return anime.titles.some(title => title.title === insertedName);
                             });
                             if (anime) {
-                                const correctAnime = allAnimeTitles[correctAnimeIndex];
-                                // Extracting the year from the aired dates
                                 const correctYear = correctAnime.aired.string.split(" to ")[0].split(",")[1].trim();
                                 const year = anime.aired.string.split(" to ")[0].split(",")[1].trim();
                                 return (
@@ -266,7 +266,7 @@ export default function ClassicMode() {
                                         <td className="table-cell">{insertedName}</td>
                                         <td className={`table-cell ${correctAnime.type === anime.type ? "correct-cell" : "incorrect-cell"}`}>{anime.type}</td>
                                         <td className={`table-cell ${correctAnime.status === anime.status ? "correct-cell" : "incorrect-cell"}`}>{anime.status}</td>
-                                        <td className={`table-cell ${correctYear === year ? "correct-cell" : "incorrect-cell"}`}>{year}</td>
+                                        <td className={`table-cell ${correctYear === year ? "correct-cell" : "incorrect-cell"}`}>{correctYear > year ? year+"►" : "◄"+year}</td>
                                         <td className={`table-cell ${correctAnime.studios[0].name === anime.studios[0].name ? "correct-cell" : "incorrect-cell"}`}>{anime.studios[0].name}</td>
                                     </tr>
                                 );
