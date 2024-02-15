@@ -30,32 +30,20 @@ export default function ClassicMode() {
     useEffect(() => {
         const storedTitle = sessionStorage.getItem('animeTitle');
         const storedCover = sessionStorage.getItem('animeCover');
+        const storedAttempts = sessionStorage.getItem('remainingAttempts');
+        const storedCorrectAnime = sessionStorage.getItem('correctAnime');
+        const storedInsertedAnime = sessionStorage.getItem('alreadyInserted');
+        const storedPixelSize = sessionStorage.getItem('pixelSize');
+        console.log(storedPixelSize)
         if (storedTitle && storedCover) {
             setAnimeTitle(storedTitle);
             setAnimeCover(storedCover);
+            setRemainingAttempts(parseInt(storedAttempts));
+            setCorrectAnime(JSON.parse(storedCorrectAnime));
+            setAlreadyInserted(JSON.parse(storedInsertedAnime));
+            setPixelSize(parseInt(storedPixelSize));
         } else {
             getRandomAnime();
-        }
-    }, []);
-
-    useEffect(() => {
-        const storedAttempts = sessionStorage.getItem('remainingAttempts');
-        if (storedAttempts) {
-            setRemainingAttempts(parseInt(storedAttempts));
-        }
-    }, []);
-
-    useEffect(() => {
-        const storedCorrectAnime = sessionStorage.getItem('correctAnime');
-        if (storedCorrectAnime) {
-            setCorrectAnime(JSON.parse(storedCorrectAnime));
-        }
-    }, []);
-
-    useEffect(() => {
-        const storedInsertedAnime = sessionStorage.getItem('alreadyInserted');
-        if (storedInsertedAnime) {
-            setAlreadyInserted(JSON.parse(storedInsertedAnime));
         }
     }, []);
 
@@ -89,8 +77,8 @@ export default function ClassicMode() {
                 setIsButtonGray(false);
                 setPassButtonDisabled(false);
             }, 5000);
-            getRandomAnime();
             setPixelSize(15);
+            getRandomAnime();
             setRemainingAttempts(remainingAttempts - 1);
             setAlreadyInserted([]);
             sessionStorage.setItem('remainingAttempts', remainingAttempts - 1);
@@ -118,17 +106,20 @@ export default function ClassicMode() {
             } else {
                 if(pixelSize === 15){
                     setPixelSize(pixelSize - 3);
+                    sessionStorage.setItem('pixelSize', pixelSize - 3);
                 }else if(pixelSize <= 12 && pixelSize > 6){
                     setPixelSize(pixelSize - 2);
+                    sessionStorage.setItem('pixelSize', pixelSize - 2);
                 }else if(pixelSize === 6){
                     setPixelSize(0);
+                    sessionStorage.setItem('pixelSize', 0);
                 }
                 setRemainingAttempts(prevAttempts => prevAttempts - 1);
                 setAlreadyInserted(prevNames => [inputText, ...prevNames]);
-                sessionStorage.setItem('remainingAttempts', remainingAttempts - 1);
-                sessionStorage.setItem('alreadyInserted', JSON.stringify([...alreadyInserted, inputText]));
             }
         }
+        sessionStorage.setItem('remainingAttempts', remainingAttempts - 1);
+        sessionStorage.setItem('alreadyInserted', JSON.stringify([...alreadyInserted, inputText]));
     };
     
     const getRandomAnime = () => {
@@ -147,6 +138,7 @@ export default function ClassicMode() {
         sessionStorage.setItem('correctAnime', JSON.stringify(randomAnime));
         sessionStorage.setItem('remainingAttempts', 6);
         sessionStorage.setItem('alreadyInserted', JSON.stringify([]));
+        sessionStorage.setItem('pixelSize', 15);
     };
     
 
