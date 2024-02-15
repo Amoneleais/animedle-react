@@ -22,11 +22,41 @@ export default function ClassicMode() {
     const [playCorrectSound, setPlayCorrectSound] = useState(false);
     const [playWrongSound, setPlayWrongSound] = useState(false);
     const [correctAnime, setCorrectAnime] = useState(null);
+    const [passButtonDisabled, setPassButtonDisabled] = useState(false);
+    const [isButtonGray, setIsButtonGray] = useState(false);
 
     const inputRef = useRef(null);
 
     useEffect(() => {
-        getRandomAnime();
+        const storedTitle = sessionStorage.getItem('animeTitle');
+        const storedCover = sessionStorage.getItem('animeCover');
+        if (storedTitle && storedCover) {
+            setAnimeTitle(storedTitle);
+            setAnimeCover(storedCover);
+        } else {
+            getRandomAnime();
+        }
+    }, []);
+
+    useEffect(() => {
+        const storedAttempts = sessionStorage.getItem('remainingAttempts');
+        if (storedAttempts) {
+            setRemainingAttempts(parseInt(storedAttempts));
+        }
+    }, []);
+
+    useEffect(() => {
+        const storedCorrectAnime = sessionStorage.getItem('correctAnime');
+        if (storedCorrectAnime) {
+            setCorrectAnime(JSON.parse(storedCorrectAnime));
+        }
+    }, []);
+
+    useEffect(() => {
+        const storedInsertedAnime = sessionStorage.getItem('alreadyInserted');
+        if (storedInsertedAnime) {
+            setAlreadyInserted(JSON.parse(storedInsertedAnime));
+        }
     }, []);
 
     useEffect(() => {
@@ -53,10 +83,17 @@ export default function ClassicMode() {
         if (remainingAttempts === 1) {
             resetGame();
         } else {
+            setPassButtonDisabled(true);
+            setIsButtonGray(true);
+            setTimeout(() => {
+                setIsButtonGray(false);
+                setPassButtonDisabled(false);
+            }, 5000);
             getRandomAnime();
             setPixelSize(15);
             setRemainingAttempts(remainingAttempts - 1);
             setAlreadyInserted([]);
+            sessionStorage.setItem('remainingAttempts', remainingAttempts - 1);
         }
     };
 
@@ -88,6 +125,8 @@ export default function ClassicMode() {
                 }
                 setRemainingAttempts(prevAttempts => prevAttempts - 1);
                 setAlreadyInserted(prevNames => [inputText, ...prevNames]);
+                sessionStorage.setItem('remainingAttempts', remainingAttempts - 1);
+                sessionStorage.setItem('alreadyInserted', JSON.stringify([...alreadyInserted, inputText]));
             }
         }
     };
@@ -103,6 +142,11 @@ export default function ClassicMode() {
         setPixelSize(15);
         setIsAnswerCorrect(false);
         setIsAnswerWrong(false);
+        sessionStorage.setItem('animeTitle', randomTitle);
+        sessionStorage.setItem('animeCover', randomAnime.images.jpg.large_image_url);
+        sessionStorage.setItem('correctAnime', JSON.stringify(randomAnime));
+        sessionStorage.setItem('remainingAttempts', 6);
+        sessionStorage.setItem('alreadyInserted', JSON.stringify([]));
     };
     
 
@@ -112,6 +156,8 @@ export default function ClassicMode() {
         setScore(0);
         getRandomAnime();
         setAlreadyInserted([]);
+        sessionStorage.setItem('remainingAttempts', 6);
+        sessionStorage.setItem('alreadyInserted', JSON.stringify([]));
     };
 
     const setAnswerWrong = () => {
@@ -121,7 +167,7 @@ export default function ClassicMode() {
         setRemainingAttempts(6);
         setScore(0);
         setAlreadyInserted([]);
-        setPlayWrongSound(true); // Play the wrong answer sound
+        setPlayWrongSound(true);
     };
 
     const setAnswerCorrect = () => {
@@ -130,7 +176,7 @@ export default function ClassicMode() {
         setRemainingAttempts(6);
         setAlreadyInserted([]);
         setScore(score + 1);
-        setPlayCorrectSound(true); // Play the correct answer sound
+        setPlayCorrectSound(true);
     };
 
     const handleInputChange = (e) => {
@@ -216,7 +262,9 @@ export default function ClassicMode() {
                         </div>                   
                     </div>
                     <div className="btn__container">
-                        <button type="button" className="btn__pass" onClick={dontKnow}>NÃO SEI</button>
+                        <button type="button" className={`btn__pass ${isButtonGray ? "gray" : ""}`} onClick={dontKnow} disabled={passButtonDisabled}>
+                            NÃO SEI
+                        </button>
                         <button type="button" className="btn__check" onClick={checkAnswer}>ADIVINHAR 推測</button>
                     </div>
                 </div>

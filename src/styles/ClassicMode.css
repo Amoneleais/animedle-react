@@ -16,6 +16,11 @@
     margin: 1vh auto;
     display: flex;
     box-shadow: -5px 5px var(--black), rgba(244, 117, 33, 0.3) -10px 10px, rgba(244, 117, 33, 0.2) -15px 15px, rgba(244, 117, 33, 0.1) -20px 20px, rgba(244, 117, 33, 0.05) -25px 25px;
+    display: flex;
+}
+
+canvas{
+    pointer-events: none;
 }
 
 .if__correct{
@@ -103,6 +108,14 @@
     color: var(--crunchy-orange);
     font-weight: bold;
     font-family: "Lato",Helvetica Neue,helvetica,sans-serif;
+    transition: ease-in-out 0.5s;
+}
+
+.gray {
+    background-color: #cacaca;
+    color: var(--black);
+    border: #cacaca;
+    transition: ease-in-out 0.5s;
 }
 
 .btn__pass:hover{
