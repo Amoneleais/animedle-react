@@ -1,0 +1,20 @@
+.img__container {
+  width: fit-content;
+  height: auto;
+  margin: 1vh auto;
+  display: flex;
+  box-shadow:
+    -5px 5px var(--black),
+    rgba(255, 131, 249, 0.3) -10px 10px,
+    rgba(255, 161, 250, 0.2) -15px 15px,
+    rgba(238, 152, 255, 0.1) -20px 20px,
+    rgba(255, 97, 184, 0.05) -25px 25px;
+}
+
+canvas {
+  pointer-events: none;
+}
+
+.strong-blur {
+  filter: blur(2px);
+}

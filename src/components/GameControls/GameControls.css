@@ -1,0 +1,45 @@
+.search__container {
+  position: relative;
+}
+
+.btn__check {
+  width: 30vh;
+  height: 5vh;
+  background-color: var(--primary);
+  color: var(--white);
+  font-weight: bold;
+  font-family:
+    "Lato",
+    Helvetica Neue,
+    helvetica,
+    sans-serif;
+  border: none;
+  cursor: pointer;
+}
+
+.btn__check:hover {
+  opacity: 0.8;
+  transition: 0.5s;
+}
+
+.btn__pass {
+  width: 10vh;
+  height: 5vh;
+  background: none;
+  border: solid 2px var(--primary);
+  color: var(--primary);
+  font-weight: bold;
+  font-family:
+    "Lato",
+    Helvetica Neue,
+    helvetica,
+    sans-serif;
+  transition: ease-in-out 0.5s;
+}
+
+.btn__pass:hover {
+  background-color: var(--red);
+  color: var(--white);
+  border: none;
+  transition: 0.5s;
+}

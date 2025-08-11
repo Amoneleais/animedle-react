@@ -1,6 +1,8 @@
 :root {
   --black: #000000;
   --white: #fbfbfb;
+  --background: #202020;
+  --background-secondary: #3a3a3a;
   --blue: #06617d;
   --gray: #606060;
   --soft-gray: #eeedef;
@@ -8,9 +10,8 @@
   --yellow: #eff9c8;
   --green: #a3e599;
   --light-blue: #a6e1ee;
-  --crunchy-orange: #ff944d;
-  --crunchy-gray: #23252b;
-  --crunchy-blue: #2abdbb;
+  --primary: #076d53;
+  --secondary: #f892ac;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
@@ -22,7 +23,7 @@
 }
 
 body {
-  background-color: var(--black);
+  background-color: var(--background);
   font-family:
     "Lato",
     Helvetica Neue,
@@ -41,7 +42,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: var(--crunchy-orange);
+  background-color: var(--primary);
   outline: none;
   border-radius: 50px;
 }

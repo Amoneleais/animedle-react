@@ -1,0 +1,33 @@
+.if__correct {
+  margin: 1vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.next_button {
+  margin: 5vh;
+  width: 30vh;
+  height: 5vh;
+  background-color: var(--primary);
+  font-weight: bold;
+  font-family:
+    "Lato",
+    Helvetica Neue,
+    helvetica,
+    sans-serif;
+  border: none;
+  cursor: pointer;
+}
+
+.next_button:hover {
+  opacity: 0.8;
+  transition: 0.5s;
+}
+
+.anime_title {
+  font-weight: lighter;
+  margin: 2vh;
+  color: var(--white);
+}

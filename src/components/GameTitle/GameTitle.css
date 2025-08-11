@@ -1,0 +1,11 @@
+.title__container {
+  width: 0 auto;
+  margin: 4vh 0 4vh 0;
+  display: flex;
+  justify-content: center;
+  color: var(--secondary);
+}
+
+.title_game_over {
+  color: var(--red);
+}

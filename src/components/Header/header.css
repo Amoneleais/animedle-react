@@ -14,7 +14,7 @@ header {
 }
 
 .title {
-  color: var(--crunchy-orange);
+  color: var(--primary);
   font-family: "Fondamento", cursive;
   text-align: center;
   flex-grow: 1;
@@ -26,14 +26,14 @@ header {
 }
 
 .title p {
-  font-size: 1vh;
+  font-size: 1.5vh;
   margin: 0;
 }
 
 .button {
   text-decoration: none;
-  border: solid 2px var(--crunchy-blue);
-  color: var(--crunchy-blue);
+  border: solid 2px var(--secondary);
+  color: var(--secondary);
   margin: 2vh;
   font-family:
     "Lato",
@@ -47,7 +47,7 @@ header {
 
 .button:hover {
   color: var(--black);
-  background-color: var(--crunchy-blue);
+  background-color: var(--secondary);
   transition: 0.5s;
 }
 
@@ -57,7 +57,7 @@ header {
   right: -250px;
   width: 45vh;
   height: 100%;
-  background-color: var(--crunchy-gray);
+  background-color: var(--background-secondary);
   padding-top: 2vh;
   text-align: center;
   display: flex;
@@ -88,7 +88,7 @@ header {
 .menu-icon {
   font-size: 24px;
   cursor: pointer;
-  color: var(--crunchy-orange);
+  color: var(--secondary);
   position: absolute;
   right: 0;
   top: 0;
@@ -103,7 +103,7 @@ header {
 .close-btn {
   font-size: 5vh;
   cursor: pointer;
-  color: var(--crunchy-orange);
+  color: var(--secondary);
   text-align: center;
   width: fit-content;
 }
