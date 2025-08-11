@@ -4,7 +4,7 @@ Animedle is a React-based game where players guess anime titles based on pixelat
 
 ## Project Structure
 
-The project has been restructured for better maintainability, reusability, and professionalism:
+The project has been structured for better maintainability, reusability, and professionalism:
 
 ```
 src/
