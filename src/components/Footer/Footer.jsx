@@ -1,13 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import './footer.css';
+import "./footer.css";
 
 export default function Footer() {
-
-    return (
-        <footer>
-            <p>Animedle — 2024</p>
-            <p>Todos os direitos reservados</p>
-        </footer>
-    );
-};
+  return (
+    <footer>
+      <p>Animedle — 2025</p>
+    </footer>
+  );
+}

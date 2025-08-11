@@ -1,44 +1,47 @@
 :root {
-    --black: #000000;
-    --white: #fbfbfb;
-    --blue: #06617D;
-    --gray: #606060;
-    --soft-gray: #EEEDEF;
-    --red: #FF9292;
-    --yellow: #eff9c8;
-    --green: #A3E599;
-    --light-blue: #A6E1EE;
-    --crunchy-orange: #FF944D;
-    --crunchy-gray: #23252B;
-    --crunchy-blue: #2ABDBB;
+  --black: #000000;
+  --white: #fbfbfb;
+  --blue: #06617d;
+  --gray: #606060;
+  --soft-gray: #eeedef;
+  --red: #ff9292;
+  --yellow: #eff9c8;
+  --green: #a3e599;
+  --light-blue: #a6e1ee;
+  --crunchy-orange: #ff944d;
+  --crunchy-gray: #23252b;
+  --crunchy-blue: #2abdbb;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    background-color: var(--black);
-    font-family: "Lato",Helvetica Neue,helvetica,sans-serif;
+body {
+  background-color: var(--black);
+  font-family:
+    "Lato",
+    Helvetica Neue,
+    helvetica,
+    sans-serif;
 }
 
 body::-webkit-scrollbar {
-    width: 0.5rem;
-    display: inline-block;
-    background: none;
-  }
-   
-  body::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  }
-   
-  body::-webkit-scrollbar-thumb {
-    background-color: var(--crunchy-orange);
-    outline: none;
-    border-radius: 50px;
+  width: 0.5rem;
+  display: inline-block;
+  background: none;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--crunchy-orange);
+  outline: none;
+  border-radius: 50px;
 }

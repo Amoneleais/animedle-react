@@ -1,20 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 // importando o css global
-import './styles/index.css';
+import "./styles/index.css";
 
-import WebRoute from './routes';
+import WebRoute from "./routes";
 
 function App() {
-
   useEffect(() => {
-    document.title = 'Animedle アニメの言葉';
+    document.title = "Animedle アニメの言葉";
   }, []);
 
   return (
     <div className="App">
-       
-        <WebRoute/>  
+      <WebRoute />
     </div>
   );
 }
